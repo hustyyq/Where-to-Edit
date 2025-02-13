@@ -7,7 +7,7 @@ NeurIPS 2024: [Learning Where to Edit Vision Transformers](https://arxiv.org/abs
     - AI Oil Painting: Please refer to [Dataset Interfaces](https://github.com/MadryLab/dataset-interfaces).
     - AI Stage Lighting: Please refer to [PUG](https://github.com/facebookresearch/PUG).
 - Locality Set
-    - A sensitive subset from [ImageNet-1k](http://image-net.org/challenges/LSVRC/2012/index), [ImageNet-R](https://github.com/hendrycks/imagenet-r), and [ImageNet-Sketch](https://github.com/HaohanWang/ImageNet-Sketch). The  selection criteria rely on the predicted probabilities of the pre-trained ViT/B-16 model as follows: a. the predicted probability for the true label is the highest, and 2) the differencebetween the top two predicted probabilities is less than 0.05, suggesting a highly ambiguous class.
+    - A sensitive subset from [ImageNet-1k](http://image-net.org/challenges/LSVRC/2012/index), [ImageNet-R](https://github.com/hendrycks/imagenet-r), and [ImageNet-Sketch](https://github.com/HaohanWang/ImageNet-Sketch). The  selection criteria rely on the predicted probabilities of the pre-trained ViT/B-16 model as follows: a. the predicted probability for the true label is the highest, and 2) the difference between the top two predicted probabilities is less than 0.05, suggesting a highly ambiguous class.
     - The sensitive subset for ViT/B-16 is provided at [DropBox Link](https://www.dropbox.com/scl/fi/0zgd2p2ya3p67c7wqy3mo/Sensitive-Images.zip?rlkey=tpfbo4br1qkowjj8phlj2vz9w&st=ihbgsda1&dl=0).
 
 ### Prepare Datasets and Pre-trained Models
@@ -23,11 +23,11 @@ python meta_train.py -a vit_b_16_224_1k --pre_root [imagenet1k dataset dir] --lr
 ### Editing Models
 - FT
     ```
-    python  edit_natural.py --root ./Natural-Image-Subset --seed 0 -a vit_b_16_224_1k   --edit-lrs 2e-5  --alg HPRD  --log  ./log/natural/FT  --max-iters 100  
+    python edit_natural.py --root ./Natural-Image-Subset  --seed 0  -a vit_b_16_224_1k  --edit-lrs 2e-5 --alg FT  --log  ./log/natural/FT  --max-iters 100  
     ```
 - HPRD
     ```
-    python  edit_natural.py --root ./Natural-Image-Subset  --seed 0 -a vit_b_16_224_1k   --edit-lrs 2e-5  --alg HPRD  --log  ./log/natural/HPRD  --max-iters 100 --checkpoints ./logs/checkpoints/7000.pth --blocks 3
+    python edit_natural.py --root ./Natural-Image-Subset  --seed 0  -a vit_b_16_224_1k  --edit-lrs 2e-5  --alg HPRD --log ./log/natural/HPRD  --max-iters 100  --checkpoints ./logs/checkpoints/7000.pth --blocks 3
     ```
 ### Citation
 If you find this repository useful in your research, please consider citing the following paper:
